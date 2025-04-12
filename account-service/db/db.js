@@ -14,10 +14,10 @@ const pool = new Pool({
 pool.connect((err, client, release) => {
     if (err) {
         console.error("Error connecting to PostgreSQL:", err.stack);
-        throw err; // Кидаємо помилку для подальшого аналізу
+        throw err;
     }
     console.log("Connected to PostgreSQL DB successfully");
-    release(); // Звільняємо клієнта назад у пул
+    release();
 });
 
 module.exports = pool;
