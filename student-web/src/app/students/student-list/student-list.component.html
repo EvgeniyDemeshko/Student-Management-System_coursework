@@ -1,0 +1,54 @@
+<div class="container">
+  <h2>Список студентів</h2>
+
+  <button mat-raised-button color="primary" (click)="navigateToReport()">
+    Отримати звітність про успішність групи
+  </button>
+  <br><br>
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Пошук</mat-label>
+    <input matInput [(ngModel)]="searchText" (ngModelChange)="searchStudents()" placeholder="Введіть ім’я, прізвище чи групу">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="full_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>ПІБ</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.last_name }} {{ student.first_name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="group_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Група</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.group_name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="course">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Курс</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ calculateCourse(student) }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="specialty_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Спеціальність</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.specialty_name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="department_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Факультет</mat-header-cell>
+      <mat-cell *matCellDef="let student">{{ student.department_name }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Дії</mat-header-cell>
+      <mat-cell *matCellDef="let student">
+        <button mat-icon-button [routerLink]="['/students', student.student_id]" title="Детальніше">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteStudent(student.student_id)" title="Відрахувати">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="openStudentDialog()">Додати студента</button>
+  </div>
+</div>

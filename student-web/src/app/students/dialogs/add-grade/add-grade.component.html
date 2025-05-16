@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Додати оцінку</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Факультет</mat-label>
+      <mat-select formControlName="department_id" required>
+        <mat-option *ngFor="let dept of departments" [value]="dept.department_id">
+          {{ dept.department_name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('department_id')?.hasError('required')">Факультет обов’язковий</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Предмет</mat-label>
+      <mat-select formControlName="subject_id" required>
+        <mat-option *ngFor="let subject of subjects" [value]="subject.subject_id">
+          {{ subject.subject_name }}
+          <span *ngIf="subject.teacher_first_name && subject.teacher_last_name">
+            ({{ subject.teacher_first_name }} {{ subject.teacher_last_name }})
+          </span>
+          <span *ngIf="!subject.teacher_first_name || !subject.teacher_last_name">
+            (Викладач не вказаний)
+          </span>
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('subject_id')?.hasError('required')">Предмет обов’язковий</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Оцінка</mat-label>
+      <input matInput formControlName="grade" type="number" required>
+      <mat-error *ngIf="form.get('grade')?.hasError('required')">Оцінка обов’язкова</mat-error>
+      <mat-error *ngIf="form.get('grade')?.hasError('min') || form.get('grade')?.hasError('max')">
+        Оцінка має бути від 0 до 100
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Скасувати</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Додати</button>
+</mat-dialog-actions>

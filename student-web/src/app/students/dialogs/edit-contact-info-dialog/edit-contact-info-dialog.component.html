@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Редагувати контактну інформацію</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Ім’я</mat-label>
+      <input matInput formControlName="first_name" required>
+      <mat-error *ngIf="form.get('first_name')?.hasError('required')">Ім’я обов’язкове</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Прізвище</mat-label>
+      <input matInput formControlName="last_name" required>
+      <mat-error *ngIf="form.get('last_name')?.hasError('required')">Прізвище обов’язкове</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" required>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Email обов’язковий</mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">Невалідний email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Номер телефону</mat-label>
+      <input matInput formControlName="phone_number">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Дата народження</mat-label>
+      <input matInput formControlName="date_of_birth" type="date">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Скасувати</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Зберегти</button>
+</mat-dialog-actions>

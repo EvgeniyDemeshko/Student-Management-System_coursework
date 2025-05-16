@@ -1,0 +1,61 @@
+<div class="container" *ngIf="student && !loading;">
+  <button mat-button color="primary" (click)="goBack()">← На головну</button>
+  <h2>Деталі студента</h2>
+  <mat-card>
+    <mat-card-content>
+      <p><strong>ПІБ:</strong> {{ student.last_name }} {{ student.first_name }}</p>
+      <p><strong>Група:</strong> {{ student.group_name }}</p>
+      <p><strong>Курс:</strong> {{ calculateCourse() }}</p>
+      <p><strong>Спеціальність:</strong> {{ student.specialty_name }}</p>
+      <p><strong>Факультет:</strong> {{ student.department_name }}</p>
+      <p><strong>Куратор:</strong> {{ student.teacher_first_name || 'Немає' }} {{ student.teacher_last_name || '' }}</p>
+      <p><strong>Email:</strong> {{ student.email }}</p>
+      <p><strong>Дата народження:</strong> {{ student.date_of_birth || 'Немає' }}</p>
+      <p><strong>Номер телефону:</strong> {{ student.phone_number || 'Немає' }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="editContactInfo()">Редагувати контакту інформацію</button>
+        <button mat-raised-button color="accent" (click)="transferStudent()">Перевести</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <h3>Предмети та оцінки</h3>
+  <table mat-table [dataSource]="gradesDataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="subject_name">
+      <th mat-header-cell *matHeaderCellDef>Предмет</th>
+      <td mat-cell *matCellDef="let grade">{{ grade.subject_name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="credits">
+      <th mat-header-cell *matHeaderCellDef>Кредити</th>
+      <td mat-cell *matCellDef="let grade">{{ grade.credits }}</td>
+    </ng-container>
+    <ng-container matColumnDef="grade">
+      <th mat-header-cell *matHeaderCellDef>Оцінка</th>
+      <td mat-cell *matCellDef="let grade">{{ grade.grade }}</td>
+    </ng-container>
+    <ng-container matColumnDef="teacher">
+      <th mat-header-cell *matHeaderCellDef>Викладач</th>
+      <td mat-cell *matCellDef="let grade">
+        {{ grade.teacher_first_name }} {{ grade.teacher_last_name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Дії</th>
+      <td mat-cell *matCellDef="let grade">
+        <button mat-icon-button color="primary" (click)="editGrade(grade)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteGrade(grade)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div class="table-actions">
+    <button mat-raised-button color="accent" (click)="addGrade()" [disabled]="!student || loading">
+      Додати оцінку
+    </button>
+  </div>
+</div>

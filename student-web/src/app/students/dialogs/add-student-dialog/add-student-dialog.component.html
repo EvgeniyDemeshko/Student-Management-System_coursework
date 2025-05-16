@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Додати студента</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Ім’я</mat-label>
+      <input matInput formControlName="first_name" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Прізвище</mat-label>
+      <input matInput formControlName="last_name" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Телефон</mat-label>
+      <input matInput formControlName="phone_number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Дата народження</mat-label>
+      <input matInput formControlName="date_of_birth" type="date">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Факультет</mat-label>
+      <mat-select formControlName="department_id" required>
+        <mat-option *ngFor="let dept of departments" [value]="dept.department_id">
+          {{ dept.department_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Спеціальність</mat-label>
+      <mat-select formControlName="specialty_id" required>
+        <mat-option *ngFor="let spec of specialties" [value]="spec.specialty_id">
+          {{ spec.specialty_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Група</mat-label>
+      <mat-select formControlName="group_id" required>
+        <mat-option *ngFor="let group of groups" [value]="group.group_id">
+          {{ group.group_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Скасувати</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Додати</button>
+</mat-dialog-actions>

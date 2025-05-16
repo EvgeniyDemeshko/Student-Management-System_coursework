@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Редагувати оцінку</h2>
+<mat-dialog-content>
+  <p>Предмет: {{ data.grade.subject_name }}</p>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Оцінка</mat-label>
+      <input matInput formControlName="grade" type="number" required>
+      <mat-error *ngIf="form.get('grade')?.hasError('required')">Оцінка обов’язкова</mat-error>
+      <mat-error *ngIf="form.get('grade')?.hasError('min') || form.get('grade')?.hasError('max')">
+        Оцінка має бути від 0 до 100
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Скасувати</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Зберегти</button>
+</mat-dialog-actions>

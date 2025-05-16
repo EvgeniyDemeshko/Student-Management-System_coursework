@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Перевести студента</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Факультет</mat-label>
+      <mat-select formControlName="department_id" required>
+        <mat-option *ngFor="let department of departments" [value]="department.department_id">
+          {{ department.department_name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('department_id')?.hasError('required')">Факультет обов’язковий</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Спеціальність</mat-label>
+      <mat-select formControlName="specialty_id" required>
+        <mat-option *ngFor="let specialty of specialties" [value]="specialty.specialty_id">
+          {{ specialty.specialty_name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('specialty_id')?.hasError('required')">Спеціальність обов’язкова</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Група</mat-label>
+      <mat-select formControlName="group_id" required>
+        <mat-option *ngFor="let group of groups" [value]="group.group_id">
+          {{ group.group_name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('group_id')?.hasError('required')">Група обов’язкова</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Скасувати</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="form.invalid">Перевести</button>
+</mat-dialog-actions>
