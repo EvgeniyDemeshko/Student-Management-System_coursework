@@ -8,14 +8,14 @@
       <p><strong>Курс:</strong> {{ calculateCourse() }}</p>
       <p><strong>Спеціальність:</strong> {{ student.specialty_name }}</p>
       <p><strong>Факультет:</strong> {{ student.department_name }}</p>
-      <p><strong>Куратор:</strong> {{ student.teacher_first_name || 'Немає' }} {{ student.teacher_last_name || '' }}</p>
+      <p><strong>Куратор:</strong> {{ student.teacher_last_name || 'Немає' }} {{ student.teacher_first_name || '' }}</p>
       <p><strong>Email:</strong> {{ student.email }}</p>
       <p><strong>Дата народження:</strong> {{ student.date_of_birth || 'Немає' }}</p>
       <p><strong>Номер телефону:</strong> {{ student.phone_number || 'Немає' }}</p>
     </mat-card-content>
     <mat-card-actions>
         <button mat-raised-button color="primary" (click)="editContactInfo()">Редагувати контакту інформацію</button>
-        <button mat-raised-button color="accent" (click)="transferStudent()">Перевести</button>
+        <button mat-raised-button color="accent" (click)="transferStudent()">Перевести на іншу спеціальність</button>
     </mat-card-actions>
   </mat-card>
 

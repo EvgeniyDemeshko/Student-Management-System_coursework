@@ -15,8 +15,8 @@
       <mat-select formControlName="subject_id" required>
         <mat-option *ngFor="let subject of subjects" [value]="subject.subject_id">
           {{ subject.subject_name }}
-          <span *ngIf="subject.teacher_first_name && subject.teacher_last_name">
-            ({{ subject.teacher_first_name }} {{ subject.teacher_last_name }})
+          <span *ngIf="subject.teacher_last_name && subject.teacher_first_name">
+            ({{ subject.teacher_last_name }} {{ subject.teacher_first_name }})
           </span>
           <span *ngIf="!subject.teacher_first_name || !subject.teacher_last_name">
             (Викладач не вказаний)
