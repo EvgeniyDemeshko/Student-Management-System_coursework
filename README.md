@@ -3,6 +3,8 @@ Overview
 This project is a course work titled "Development of an Information System for Student Management Using Angular and Node.js." It aims to create a robust and efficient system for managing student data within a university's dean office. The system leverages modern web development technologies and a PostgreSQL database to automate and streamline student data management.
 Features
 
+<img width="602" height="306" alt="зображення_2025-07-23_054154584" src="https://github.com/user-attachments/assets/bc712b31-a2bc-4dd6-9749-9c6816284275" />
+
 Student Data Management: Store and manage information about students, including personal details, academic groups, specialties, departments, and grades.
 Database Operations: Perform CRUD (Create, Read, Update, Delete) operations on student-related data using SQL queries in PostgreSQL.
 Web Interface: A user-friendly client-side application built with Angular, allowing users to view, add, edit, and delete student records, as well as generate performance reports.
@@ -23,6 +25,8 @@ Database: The PostgreSQL database schema includes tables for departments, specia
 Client-Side: The Angular application provides components for displaying student lists, personal profiles, and generating reports. It interacts with the server via HTTP requests.
 Server-Side: The Node.js server with the Express.js framework handles HTTP requests, processes SQL queries, and returns JSON responses to the client.
 Diagrams: The project includes UML diagrams (e.g., class diagrams, use case diagrams) to illustrate the system’s architecture and data relationships.
+
+<img width="622" height="358" alt="зображення_2025-07-23_054247469" src="https://github.com/user-attachments/assets/19cf1a73-c287-41b6-90e0-7db3165e0a1a" />
 
 Installation
 
